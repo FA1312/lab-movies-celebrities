@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 
-// require Model
 const Celebrity = require("../models/Celebrity.model");
 
 // GET - List of all celebrities
@@ -10,7 +9,7 @@ router.get("/celebrities", async (req, res, next) => {
     const celebritiesData = await Celebrity.find();
     console.log(celebritiesData);
     // we have to send the object, and I put a key: { celebrities: arrayfromDB }
-    res.render("celebrities/all", { celebrities: celebritiesData });
+    res.render("celebrities/celebrities", { celebrities: celebritiesData });
   } catch (error) {
     console.error("Error while creating the celebrity", error);
     next(error);
@@ -28,7 +27,7 @@ router.get("/celebrities/create", async (req, res, next) => {
 });
 
 // POST - CREATE a celebrity
-// localhost:3000/celebrities/create
+
 router.post("/celebrities/create", async (req, res, next) => {
   try {
     const { name, occupation, catchPhrase } = req.body;
